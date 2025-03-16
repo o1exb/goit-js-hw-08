@@ -68,23 +68,13 @@ const gallery = document.querySelector('.gallery');
 
 const markup = images
   .map(image => {
-    const li = document.createElement('li');
-    li.classList.add('gallery-item');
-
-    const a = document.createElement('a');
-    a.classList.add('gallery-link');
-    a.href = image.original;
-
-    const img = document.createElement('img');
-    img.classList.add('gallery-image');
-    img.src = image.preview;
-    img.alt = image.description;
-    img.dataset.source = image.original;
-
-    a.appendChild(img);
-    li.appendChild(a);
-
-    return li.outerHTML;
+    return `<li class="gallery-item>
+<a class="gallery-link" href="${image.original}">
+<img class="gallery-image" src="${image.preview}"
+data-source="${image.original}"
+alt="${image.description}"/>
+</a>
+</li>`;
   })
   .join('');
 
@@ -97,15 +87,8 @@ gallery.addEventListener('click', event => {
       `<img src=${largeImageUrl} width="800" height="600">`
     );
     modalWindow.show();
-  }
-});
-
-const links = document.querySelectorAll('.gallery-link');
-
-links.forEach(link => {
-  link.addEventListener('click', event => {
     event.preventDefault();
-  });
+  }
 });
 
 const zoomImages = document.querySelectorAll('.gallery-image');
